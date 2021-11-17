@@ -4,3 +4,6 @@
 *.ptx
 *.cubin
 *.fatbin
+.idea/
+CMakeLists.txt
+cmake-build-debug
