@@ -9,18 +9,20 @@ typedef struct {
     float3 vel;
 } Particle;
 
+void oneTimeStep(Particle *p) {
+    p.pos.x += p.vel.x;
+    p.pos.y += p.vel.y;
+    p.pos.z += p.vel.z;
+}
+
 __global__ void oneTimestepGPU(Particle *p) {
     const int id = blockIdx.x * blockDim.x + threadIdx.x;
-    p[id].pos.x += p[id].vel.x;
-    p[id].pos.y += p[id].vel.y;
-    p[id].pos.z += p[id].vel.z;
+    oneTimeStep(p[id]);
 }
 
 void oneTimestepCPU(Particle *p, int n) {
     for (int i = 0; i < n; i++) {
-        p[i].pos.x += p[i].vel.x;
-        p[i].pos.y += p[i].vel.y;
-        p[i].pos.z += p[i].vel.z;
+        oneTimeStep(p[i]);
     }
 }
 
