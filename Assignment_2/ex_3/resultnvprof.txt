@@ -1,0 +1,21 @@
+==2766== NVPROF is profiling process 2766, command: ./ex3.out 10000 500 256
+10000 500 256 0.034627 0.013693 0
+==2766== Profiling application: ./ex3.out 10000 500 256
+==2766== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   99.61%  10.187ms       500  20.373us  19.840us  22.688us  oneTimestepGPU(Particle*)
+                    0.20%  20.352us         1  20.352us  20.352us  20.352us  [CUDA memcpy HtoD]
+                    0.19%  19.841us         1  19.841us  19.841us  19.841us  [CUDA memcpy DtoH]
+      API calls:   81.79%  61.937ms         1  61.937ms  61.937ms  61.937ms  cudaMalloc
+                   16.01%  12.125ms       500  24.250us  23.579us  31.068us  cudaDeviceSynchronize
+                    1.61%  1.2169ms       500  2.4330us  2.2370us  17.022us  cudaLaunchKernel
+                    0.23%  175.47us         2  87.734us  47.357us  128.11us  cudaMemcpy
+                    0.22%  165.69us       101  1.6400us     191ns  69.733us  cuDeviceGetAttribute
+                    0.08%  64.020us         1  64.020us  64.020us  64.020us  cudaFree
+                    0.04%  27.824us         1  27.824us  27.824us  27.824us  cuDeviceGetName
+                    0.01%  9.6740us         1  9.6740us  9.6740us  9.6740us  cuDeviceGetPCIBusId
+                    0.00%  1.8550us         3     618ns     214ns  1.3750us  cuDeviceGetCount
+                    0.00%     862ns         2     431ns     169ns     693ns  cuDeviceGet
+                    0.00%     540ns         1     540ns     540ns     540ns  cuDeviceTotalMem
+                    0.00%     303ns         1     303ns     303ns     303ns  cuDeviceGetUuid
+
