@@ -9,6 +9,10 @@
 #define TPB 256
 #endif
 
+#ifndef FLOAT
+#define FLOAT double
+#endif
+
 double cpuSecond() {
     struct timeval tp;
     gettimeofday(&tp, NULL);
@@ -17,7 +21,7 @@ double cpuSecond() {
 
 __global__ void kernel(int *block_counts, int iter, curandState *states) {
 	__shared__ int counts[TPB];
-	double x, y, z;
+	FLOAT x, y, z;
 	const int id = threadIdx.x + blockDim.x * blockIdx.x;
 
 	curand_init(id, id, 0, &states[id]);
@@ -46,7 +50,8 @@ int main(int argc, char *argv[]) {
     const int THREAD_ITER = NUM_ITER / (BLOCKS * TPB);
     const int REST = NUM_ITER % (BLOCKS * TPB);
     int count = 0;
-    double pi, iStart, iElaps;
+    FLOAT pi;
+    double iStart, iElaps;
     int host_bc[BLOCKS];
     int * device_bc;
     curandState * dev_random;
@@ -66,8 +71,8 @@ int main(int argc, char *argv[]) {
         count += host_bc[i];
     }
 
-    pi = ((double)count / (double)(NUM_ITER - REST)) * 4.0;
-    double error = M_PI - pi;
+    pi = ((FLOAT)count / (FLOAT)(NUM_ITER - REST)) * 4.0;
+    FLOAT error = M_PI - pi;
     
     printf("pi = %f, error = %f, time: %f s\n", pi, error, iElaps);
     
