@@ -8,9 +8,8 @@ typedef struct {
     float3 vel;
 } Particle;
 
-__global__ void oneTimestepGPU(Particle *p, int offset, int streamSize) {
-    const int id = blockIdx.x * blockDim.x + threadIdx.x + offset;
-    if (id >= offset + streamSize) return; 
+__global__ void oneTimestepGPU(Particle *p) {
+    const int id = blockIdx.x * blockDim.x + threadIdx.x;  
     p[id].pos.x += p[id].vel.x;
     p[id].pos.y += p[id].vel.y;
     p[id].pos.z += p[id].vel.z;
@@ -34,18 +33,14 @@ int main(int argc, char *argv[]) {
     int NUM_PARTICLES = atoi(argv[1]);
     int NUM_ITERATIONS = atoi(argv[2]);
     int BLOCK_SIZE = atoi(argv[3]);
-    int NUM_STREAMS = atoi(argv[4]);
     Particle pCPU[NUM_PARTICLES];
-    Particle pCPUres[NUM_PARTICLES];
-    Particle * pGPUres;
     Particle *pGPU;
     int nBlocks;
     double iStart, iElapsCPU, iElapsGPU;
     double error;
     int nErrors;
 
-    cudaMalloc(&pGPU, NUM_PARTICLES * sizeof(Particle));
-    cudaMallocHost(&pGPUres, NUM_PARTICLES * sizeof(Particle));
+    cudaMallocManaged(&pGPU, NUM_PARTICLES * sizeof(Particle));
 
     printf("Particles, Iterations, Thread block size, CPU time, GPU time, Errors\n");
 
@@ -58,58 +53,41 @@ int main(int argc, char *argv[]) {
         pCPU[i].vel.x = rand();
         pCPU[i].vel.y = rand();
         pCPU[i].vel.z = rand();
-	    pCPUres[i] = pCPU[i];
-        pGPUres[i] = pCPU[i];
+        pGPU[i] = pCPU[i];
     }
     
     // Meassure CPU performance
     iStart = cpuSecond();
     for (int i = 0; i < NUM_ITERATIONS; i++) {
-        oneTimestepCPU(pCPUres, NUM_PARTICLES);
+        oneTimestepCPU(pCPU, NUM_PARTICLES);
     }
     iElapsCPU = cpuSecond() - iStart;
     
-    const int streamSize = NUM_PARTICLES / NUM_STREAMS;
-    const int streamBytes = streamSize * sizeof(Particle);
-    cudaStream_t stream[NUM_STREAMS];
-
-    for (int i = 0; i < NUM_STREAMS; i++)
-        cudaStreamCreate(&stream[i]);
-
     // Meassure GPU performance
     iStart = cpuSecond();
 
-    for (int j = 0; j < NUM_ITERATIONS; j++)
-        for (int i = 0; i < NUM_STREAMS; i++) {
-            int offset = i * streamSize;
-            cudaMemcpyAsync(&pGPU[offset], &pGPUres[offset], streamBytes, cudaMemcpyHostToDevice, stream[i]);
-            oneTimestepGPU<<<(streamSize + BLOCK_SIZE - 1)/BLOCK_SIZE, BLOCK_SIZE, 0, stream[i]>>>(pGPU, offset, streamSize);
-            cudaMemcpyAsync(&pGPUres[offset], &pGPU[offset], streamBytes, cudaMemcpyDeviceToHost, stream[i]);
-        }
-    
-    cudaDeviceSynchronize();
+    for (int i = 0; i < NUM_ITERATIONS; i++) {
+        oneTimestepGPU<<<nBlocks, BLOCK_SIZE>>>(pGPU);
+        cudaDeviceSynchronize();
+    }
     iElapsGPU = cpuSecond() - iStart;
-    cudaFree(pGPU);
-
-    for (int i = 0; i < NUM_STREAMS; i++)
-        cudaStreamDestroy(stream[i]);
 
     // Check the number of errors
     nErrors = 0;
     for (int i = 0; i < NUM_PARTICLES; i++) {
-        error = fabs(pCPUres[i].pos.x - pGPUres[i].pos.x);
+        error = fabs(pCPU[i].pos.x - pGPU[i].pos.x);
         if (error > ERROR_RANGE) {
             nErrors++;
             continue;
         }
 
-        error = fabs(pCPUres[i].pos.y - pGPUres[i].pos.y);
+        error = fabs(pCPU[i].pos.y - pGPU[i].pos.y);
         if (error > ERROR_RANGE) {
             nErrors++;
             continue;
         }
 
-        error = fabs(pCPUres[i].pos.z - pGPUres[i].pos.z);
+        error = fabs(pCPU[i].pos.z - pGPU[i].pos.z);
         if (error > ERROR_RANGE) {
             nErrors++;
             continue;
@@ -118,5 +96,5 @@ int main(int argc, char *argv[]) {
 
     printf("%d %d %d %f %f %d\n", NUM_PARTICLES, NUM_ITERATIONS, BLOCK_SIZE, iElapsCPU, iElapsGPU, nErrors);
 
-    cudaFreeHost(pGPUres);
+    cudaFree(pGPU);
 }

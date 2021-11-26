@@ -1,0 +1,287 @@
+ ./exercise_2a.out 10000 500 256
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+10000 500 256 0.034792 0.012811 0
+
+Copy every iteration, no pinned memory
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+10000 500 256 0.034908 0.053578 0
+
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+==22320== NVPROF is profiling process 22320, command: ./exercise_2a.out 10000 500 256
+10000 500 256 0.033626 0.056947 0
+==22320== Profiling application: ./exercise_2a.out 10000 500 256
+==22320== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   33.47%  10.023ms       500  20.046us  19.425us  21.665us  oneTimestepGPU(Particle*)
+                   33.35%  9.9859ms       500  19.971us  19.649us  20.385us  [CUDA memcpy HtoD]
+                   33.18%  9.9372ms       500  19.874us  19.713us  29.889us  [CUDA memcpy DtoH]
+      API calls:   49.96%  56.641ms         1  56.641ms  56.641ms  56.641ms  cudaMalloc
+                   30.03%  34.042ms      1000  34.042us  21.232us  55.634us  cudaMemcpy
+                   18.04%  20.454ms       500  40.908us  29.650us  49.149us  cudaDeviceSynchronize
+                    1.76%  1.9963ms       500  3.9920us  3.6270us  17.606us  cudaLaunchKernel
+                    0.12%  141.43us       101  1.4000us     162ns  58.915us  cuDeviceGetAttribute
+                    0.06%  69.574us         1  69.574us  69.574us  69.574us  cudaFree
+                    0.02%  22.634us         1  22.634us  22.634us  22.634us  cuDeviceGetName
+                    0.01%  8.8570us         1  8.8570us  8.8570us  8.8570us  cuDeviceGetPCIBusId
+                    0.00%  1.3600us         3     453ns     203ns     851ns  cuDeviceGetCount
+                    0.00%     791ns         2     395ns     169ns     622ns  cuDeviceGet
+                    0.00%     478ns         1     478ns     478ns     478ns  cuDeviceTotalMem
+                    0.00%     346ns         1     346ns     346ns     346ns  cuDeviceGetUuid
+
+
+Copy every iteration, pinned memory
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+10000 500 256 0.035978 0.035914 0
+
+==22628== NVPROF is profiling process 22628, command: ./exercise_2a.out 10000 500 256
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+10000 500 256 0.035694 0.042066 0
+==22628== Profiling application: ./exercise_2a.out 10000 500 256
+==22628== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   33.91%  10.052ms       500  20.104us  19.457us  28.705us  oneTimestepGPU(Particle*)
+                   33.23%  9.8510ms       500  19.702us  19.424us  28.417us  [CUDA memcpy HtoD]
+                   32.86%  9.7406ms       500  19.481us  19.392us  32.609us  [CUDA memcpy DtoH]
+      API calls:   56.81%  55.667ms         1  55.667ms  55.667ms  55.667ms  cudaMalloc
+                   26.04%  25.515ms      1000  25.515us  24.898us  51.455us  cudaMemcpy
+                   15.05%  14.743ms       500  29.486us  21.546us  1.5518ms  cudaDeviceSynchronize
+                    1.52%  1.4943ms       500  2.9880us  2.6800us  18.074us  cudaLaunchKernel
+                    0.25%  243.66us         1  243.66us  243.66us  243.66us  cudaHostAlloc
+                    0.21%  208.38us       101  2.0630us     156ns  84.712us  cuDeviceGetAttribute
+                    0.08%  77.050us         1  77.050us  77.050us  77.050us  cudaFree
+                    0.03%  30.047us         1  30.047us  30.047us  30.047us  cuDeviceGetName
+                    0.01%  9.8290us         1  9.8290us  9.8290us  9.8290us  cuDeviceGetPCIBusId
+                    0.00%  2.1400us         3     713ns     256ns  1.1580us  cuDeviceGetCount
+                    0.00%  1.2310us         2     615ns     181ns  1.0500us  cuDeviceGet
+                    0.00%     680ns         1     680ns     680ns     680ns  cuDeviceTotalMem
+                    0.00%     374ns         1     374ns     374ns     374ns  cuDeviceGetUuid
+
+
+ROUND 2 with 100,000, pinned memory
+
+==22628== NVPROF is profiling process 22628, command: ./exercise_2a.out 10000 500 256
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+10000 500 256 0.035694 0.042066 0
+==22628== Profiling application: ./exercise_2a.out 10000 500 256
+==22628== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   33.91%  10.052ms       500  20.104us  19.457us  28.705us  oneTimestepGPU(Particle*)
+                   33.23%  9.8510ms       500  19.702us  19.424us  28.417us  [CUDA memcpy HtoD]
+                   32.86%  9.7406ms       500  19.481us  19.392us  32.609us  [CUDA memcpy DtoH]
+      API calls:   56.81%  55.667ms         1  55.667ms  55.667ms  55.667ms  cudaMalloc
+                   26.04%  25.515ms      1000  25.515us  24.898us  51.455us  cudaMemcpy
+                   15.05%  14.743ms       500  29.486us  21.546us  1.5518ms  cudaDeviceSynchronize
+                    1.52%  1.4943ms       500  2.9880us  2.6800us  18.074us  cudaLaunchKernel
+                    0.25%  243.66us         1  243.66us  243.66us  243.66us  cudaHostAlloc
+                    0.21%  208.38us       101  2.0630us     156ns  84.712us  cuDeviceGetAttribute
+                    0.08%  77.050us         1  77.050us  77.050us  77.050us  cudaFree
+                    0.03%  30.047us         1  30.047us  30.047us  30.047us  cuDeviceGetName
+                    0.01%  9.8290us         1  9.8290us  9.8290us  9.8290us  cuDeviceGetPCIBusId
+                    0.00%  2.1400us         3     713ns     256ns  1.1580us  cuDeviceGetCount
+                    0.00%  1.2310us         2     615ns     181ns  1.0500us  cuDeviceGet
+                    0.00%     680ns         1     680ns     680ns     680ns  cuDeviceTotalMem
+                    0.00%     374ns         1     374ns     374ns     374ns  cuDeviceGetUuid
+
+
+Managed memory
+==24501== NVPROF is profiling process 24501, command: ./exercise_2b.out 10000 500 256
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+10000 500 256 0.050301 0.022566 0
+==24501== Profiling application: ./exercise_2b.out 10000 500 256
+==24501== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:  100.00%  10.020ms       500  20.040us  19.521us  22.497us  oneTimestepGPU(Particle*)
+      API calls:   77.56%  78.018ms         1  78.018ms  78.018ms  78.018ms  cudaMallocManaged
+                   12.75%  12.821ms       500  25.642us  24.670us  75.692us  cudaDeviceSynchronize
+                    9.47%  9.5262ms       500  19.052us  17.915us  176.11us  cudaLaunchKernel
+                    0.13%  131.71us       101  1.3040us     148ns  55.572us  cuDeviceGetAttribute
+                    0.06%  64.956us         1  64.956us  64.956us  64.956us  cudaFree
+                    0.02%  23.505us         1  23.505us  23.505us  23.505us  cuDeviceGetName
+                    0.01%  6.4360us         1  6.4360us  6.4360us  6.4360us  cuDeviceGetPCIBusId
+                    0.00%  1.8560us         3     618ns     284ns     982ns  cuDeviceGetCount
+                    0.00%     825ns         2     412ns     195ns     630ns  cuDeviceGet
+                    0.00%     388ns         1     388ns     388ns     388ns  cuDeviceTotalMem
+                    0.00%     286ns         1     286ns     286ns     286ns  cuDeviceGetUuid
+
+==24501== Unified Memory profiling result:
+Device "NVIDIA GeForce GTX 745 (0)"
+   Count  Avg Size  Min Size  Max Size  Total Size  Total Time  Name
+       1  236.00KB  236.00KB  236.00KB  236.0000KB  21.12000us  Host To Device
+      12  42.666KB  4.0000KB  124.00KB  512.0000KB  52.96100us  Device To Host
+Total CPU Page faults: 6
+
+
+
+
+
+
+
+
+--- Exercise 3 ---
+With 10000 elements:
+
+==27635== NVPROF is profiling process 27635, command: ./exercise_3.out 10000 500 256 1
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+10000 500 256 0.033526 0.037381 0
+==27635== Profiling application: ./exercise_3.out 10000 500 256 1
+==27635== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   34.22%  10.157ms       500  20.314us  19.424us  30.401us  [CUDA memcpy HtoD]
+                   33.09%  9.8219ms       500  19.643us  19.392us  21.441us  [CUDA memcpy DtoH]
+                   32.69%  9.7052ms       500  19.410us  18.592us  25.185us  oneTimestepGPU(Particle*, int, int)
+      API calls:   60.06%  56.884ms         1  56.884ms  56.884ms  56.884ms  cudaMalloc
+                   35.78%  33.888ms         1  33.888ms  33.888ms  33.888ms  cudaDeviceSynchronize
+                    2.05%  1.9395ms      1000  1.9390us  1.7170us  17.878us  cudaMemcpyAsync
+                    1.36%  1.2893ms       500  2.5780us  2.3770us  27.116us  cudaLaunchKernel
+                    0.26%  244.97us         1  244.97us  244.97us  244.97us  cudaHostAlloc
+                    0.18%  167.20us         1  167.20us  167.20us  167.20us  cudaFreeHost
+                    0.17%  162.77us       101  1.6110us     160ns  68.000us  cuDeviceGetAttribute
+                    0.08%  76.545us         1  76.545us  76.545us  76.545us  cudaFree
+                    0.03%  25.167us         1  25.167us  25.167us  25.167us  cuDeviceGetName
+                    0.02%  14.611us         1  14.611us  14.611us  14.611us  cudaStreamCreate
+                    0.01%  13.293us         1  13.293us  13.293us  13.293us  cuDeviceGetPCIBusId
+                    0.01%  5.6900us         1  5.6900us  5.6900us  5.6900us  cudaStreamDestroy
+                    0.00%  1.5690us         3     523ns     235ns  1.0970us  cuDeviceGetCount
+                    0.00%     951ns         2     475ns     175ns     776ns  cuDeviceGet
+                    0.00%     363ns         1     363ns     363ns     363ns  cuDeviceTotalMem
+                    0.00%     300ns         1     300ns     300ns     300ns  cuDeviceGetUuid
+
+
+==27659== NVPROF is profiling process 27659, command: ./exercise_3.out 10000 500 256 2
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+10000 500 256 0.035612 0.029378 0
+==27659== Profiling application: ./exercise_3.out 10000 500 256 2
+==27659== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   36.00%  12.444ms      1000  12.443us  11.136us  21.409us  oneTimestepGPU(Particle*, int, int)
+                   33.05%  11.425ms      1000  11.425us  10.368us  12.768us  [CUDA memcpy HtoD]
+                   30.95%  10.699ms      1000  10.699us  10.176us  12.225us  [CUDA memcpy DtoH]
+      API calls:   65.14%  55.097ms         1  55.097ms  55.097ms  55.097ms  cudaMalloc
+                   26.25%  22.203ms         1  22.203ms  22.203ms  22.203ms  cudaDeviceSynchronize
+                    4.58%  3.8721ms      2000  1.9360us  1.6650us  13.258us  cudaMemcpyAsync
+                    3.21%  2.7144ms      1000  2.7140us  2.5170us  20.076us  cudaLaunchKernel
+                    0.30%  253.64us         1  253.64us  253.64us  253.64us  cudaHostAlloc
+                    0.19%  163.02us         1  163.02us  163.02us  163.02us  cudaFreeHost
+                    0.16%  131.34us       101  1.3000us     111ns  57.508us  cuDeviceGetAttribute
+                    0.10%  82.701us         1  82.701us  82.701us  82.701us  cudaFree
+                    0.03%  23.527us         2  11.763us  1.8340us  21.693us  cudaStreamCreate
+                    0.03%  21.146us         1  21.146us  21.146us  21.146us  cuDeviceGetName
+                    0.01%  9.5820us         1  9.5820us  9.5820us  9.5820us  cuDeviceGetPCIBusId
+                    0.01%  7.9070us         2  3.9530us  1.8320us  6.0750us  cudaStreamDestroy
+                    0.00%  1.3290us         3     443ns     158ns     969ns  cuDeviceGetCount
+                    0.00%     763ns         2     381ns     132ns     631ns  cuDeviceGet
+                    0.00%     472ns         1     472ns     472ns     472ns  cuDeviceTotalMem
+                    0.00%     194ns         1     194ns     194ns     194ns  cuDeviceGetUuid
+
+
+==27679== NVPROF is profiling process 27679, command: ./exercise_3.out 10000 500 256 4
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+10000 500 256 0.034631 0.033420 0
+==27679== Profiling application: ./exercise_3.out 10000 500 256 4
+==27679== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   37.95%  15.177ms      2000  7.5880us  6.0800us  17.761us  oneTimestepGPU(Particle*, int, int)
+                   32.05%  12.820ms      2000  6.4090us  5.7920us  8.1920us  [CUDA memcpy HtoD]
+                   30.00%  11.997ms      2000  5.9980us  5.6000us  18.657us  [CUDA memcpy DtoH]
+      API calls:   61.33%  52.429ms         1  52.429ms  52.429ms  52.429ms  cudaMalloc
+                   21.60%  18.469ms         1  18.469ms  18.469ms  18.469ms  cudaDeviceSynchronize
+                    9.69%  8.2861ms      4000  2.0710us  1.7820us  13.769us  cudaMemcpyAsync
+                    6.52%  5.5729ms      2000  2.7860us  2.5840us  19.134us  cudaLaunchKernel
+                    0.30%  252.50us         1  252.50us  252.50us  252.50us  cudaHostAlloc
+                    0.19%  161.47us       101  1.5980us     189ns  67.376us  cuDeviceGetAttribute
+                    0.19%  161.34us         1  161.34us  161.34us  161.34us  cudaFreeHost
+                    0.09%  77.346us         1  77.346us  77.346us  77.346us  cudaFree
+                    0.03%  28.596us         1  28.596us  28.596us  28.596us  cuDeviceGetName
+                    0.03%  26.182us         4  6.5450us  1.3930us  21.450us  cudaStreamCreate
+                    0.01%  10.810us         4  2.7020us  1.5820us  5.8640us  cudaStreamDestroy
+                    0.01%  9.7700us         1  9.7700us  9.7700us  9.7700us  cuDeviceGetPCIBusId
+                    0.00%  2.0180us         3     672ns     274ns  1.4300us  cuDeviceGetCount
+                    0.00%  1.0870us         2     543ns     194ns     893ns  cuDeviceGet
+                    0.00%     487ns         1     487ns     487ns     487ns  cuDeviceTotalMem
+                    0.00%     359ns         1     359ns     359ns     359ns  cuDeviceGetUuid
+
+
+
+With 100000 elements:
+
+==27753== NVPROF is profiling process 27753, command: ./exercise_3.out 100000 500 256 1
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+100000 500 256 0.340051 0.299283 0
+==27753== Profiling application: ./exercise_3.out 100000 500 256 1
+==27753== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   35.17%  102.36ms       500  204.71us  198.15us  304.36us  oneTimestepGPU(Particle*, int, int)
+                   32.96%  95.922ms       500  191.84us  190.05us  249.00us  [CUDA memcpy DtoH]
+                   31.88%  92.782ms       500  185.56us  183.91us  239.94us  [CUDA memcpy HtoD]
+      API calls:   82.98%  295.83ms         1  295.83ms  295.83ms  295.83ms  cudaDeviceSynchronize
+                   15.81%  56.374ms         1  56.374ms  56.374ms  56.374ms  cudaMalloc
+                    0.52%  1.8480ms      1000  1.8470us  1.6360us  16.504us  cudaMemcpyAsync
+                    0.37%  1.3365ms       500  2.6720us  2.3970us  27.254us  cudaLaunchKernel
+                    0.13%  472.41us         1  472.41us  472.41us  472.41us  cudaHostAlloc
+                    0.08%  300.36us         1  300.36us  300.36us  300.36us  cudaFreeHost
+                    0.05%  183.13us       101  1.8130us     186ns  76.283us  cuDeviceGetAttribute
+                    0.03%  94.563us         1  94.563us  94.563us  94.563us  cudaFree
+                    0.01%  28.525us         1  28.525us  28.525us  28.525us  cuDeviceGetName
+                    0.01%  19.670us         1  19.670us  19.670us  19.670us  cudaStreamCreate
+                    0.00%  11.930us         1  11.930us  11.930us  11.930us  cuDeviceGetPCIBusId
+                    0.00%  7.5330us         1  7.5330us  7.5330us  7.5330us  cudaStreamDestroy
+                    0.00%  2.2460us         3     748ns     284ns  1.3070us  cuDeviceGetCount
+                    0.00%     996ns         2     498ns     251ns     745ns  cuDeviceGet
+                    0.00%     501ns         1     501ns     501ns     501ns  cuDeviceTotalMem
+                    0.00%     333ns         1     333ns     333ns     333ns  cuDeviceGetUuid
+
+
+==27770== NVPROF is profiling process 27770, command: ./exercise_3.out 100000 500 256 2
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+100000 500 256 0.337797 0.217320 0
+==27770== Profiling application: ./exercise_3.out 100000 500 256 2
+==27770== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   36.22%  109.25ms      1000  109.25us  96.259us  201.09us  [CUDA memcpy DtoH]
+                   34.11%  102.89ms      1000  102.89us  92.706us  214.79us  [CUDA memcpy HtoD]
+                   29.67%  89.482ms      1000  89.481us  86.467us  127.72us  oneTimestepGPU(Particle*, int, int)
+      API calls:   77.26%  208.48ms         1  208.48ms  208.48ms  208.48ms  cudaDeviceSynchronize
+                   19.30%  52.081ms         1  52.081ms  52.081ms  52.081ms  cudaMalloc
+                    1.80%  4.8600ms      2000  2.4300us  1.6160us  19.028us  cudaMemcpyAsync
+                    1.22%  3.3042ms      1000  3.3040us  2.3180us  21.511us  cudaLaunchKernel
+                    0.17%  466.82us         1  466.82us  466.82us  466.82us  cudaHostAlloc
+                    0.13%  338.04us         1  338.04us  338.04us  338.04us  cudaFreeHost
+                    0.05%  140.68us       101  1.3920us     157ns  58.252us  cuDeviceGetAttribute
+                    0.03%  88.378us         1  88.378us  88.378us  88.378us  cudaFree
+                    0.01%  27.675us         2  13.837us  1.7630us  25.912us  cudaStreamCreate
+                    0.01%  24.004us         1  24.004us  24.004us  24.004us  cuDeviceGetName
+                    0.00%  10.177us         1  10.177us  10.177us  10.177us  cuDeviceGetPCIBusId
+                    0.00%  8.9160us         2  4.4580us  1.9370us  6.9790us  cudaStreamDestroy
+                    0.00%  1.2800us         3     426ns     232ns     805ns  cuDeviceGetCount
+                    0.00%     901ns         2     450ns     183ns     718ns  cuDeviceGet
+                    0.00%     412ns         1     412ns     412ns     412ns  cuDeviceTotalMem
+                    0.00%     323ns         1     323ns     323ns     323ns  cuDeviceGetUuid
+
+
+==27790== NVPROF is profiling process 27790, command: ./exercise_3.out 100000 500 256 4
+Particles, Iterations, Thread block size, CPU time, GPU time, Errors
+100000 500 256 0.337225 0.215738 0
+==27790== Profiling application: ./exercise_3.out 100000 500 256 4
+==27790== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   35.51%  107.04ms      2000  53.520us  48.257us  75.042us  [CUDA memcpy DtoH]
+                   33.94%  102.30ms      2000  51.149us  46.818us  71.330us  [CUDA memcpy HtoD]
+                   30.55%  92.072ms      2000  46.036us  44.257us  91.299us  oneTimestepGPU(Particle*, int, int)
+      API calls:   72.92%  201.27ms         1  201.27ms  201.27ms  201.27ms  cudaDeviceSynchronize
+                   21.85%  60.300ms         1  60.300ms  60.300ms  60.300ms  cudaMalloc
+                    2.83%  7.8018ms      4000  1.9500us  1.6820us  15.603us  cudaMemcpyAsync
+                    2.00%  5.5214ms      2000  2.7600us  2.5630us  22.665us  cudaLaunchKernel
+                    0.17%  471.82us         1  471.82us  471.82us  471.82us  cudaHostAlloc
+                    0.11%  298.76us         1  298.76us  298.76us  298.76us  cudaFreeHost
+                    0.06%  160.38us       101  1.5870us     188ns  66.477us  cuDeviceGetAttribute
+                    0.03%  90.531us         1  90.531us  90.531us  90.531us  cudaFree
+                    0.01%  31.189us         4  7.7970us  1.2900us  26.345us  cudaStreamCreate
+                    0.01%  27.301us         1  27.301us  27.301us  27.301us  cuDeviceGetName
+                    0.00%  12.151us         4  3.0370us  1.6510us  6.7820us  cudaStreamDestroy
+                    0.00%  10.063us         1  10.063us  10.063us  10.063us  cuDeviceGetPCIBusId
+                    0.00%  2.1400us         3     713ns     344ns  1.1170us  cuDeviceGetCount
+                    0.00%  1.0310us         2     515ns     264ns     767ns  cuDeviceGet
+                    0.00%     620ns         1     620ns     620ns     620ns  cuDeviceTotalMem
+                    0.00%     388ns         1     388ns     388ns     388ns  cuDeviceGetUuid
+
+

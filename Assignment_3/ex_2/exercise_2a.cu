@@ -8,9 +8,8 @@ typedef struct {
     float3 vel;
 } Particle;
 
-__global__ void oneTimestepGPU(Particle *p, int offset, int streamSize) {
-    const int id = blockIdx.x * blockDim.x + threadIdx.x + offset;
-    if (id >= offset + streamSize) return; 
+__global__ void oneTimestepGPU(Particle *p) {
+    const int id = blockIdx.x * blockDim.x + threadIdx.x;  
     p[id].pos.x += p[id].vel.x;
     p[id].pos.y += p[id].vel.y;
     p[id].pos.z += p[id].vel.z;
@@ -34,7 +33,6 @@ int main(int argc, char *argv[]) {
     int NUM_PARTICLES = atoi(argv[1]);
     int NUM_ITERATIONS = atoi(argv[2]);
     int BLOCK_SIZE = atoi(argv[3]);
-    int NUM_STREAMS = atoi(argv[4]);
     Particle pCPU[NUM_PARTICLES];
     Particle pCPUres[NUM_PARTICLES];
     Particle * pGPUres;
@@ -69,30 +67,17 @@ int main(int argc, char *argv[]) {
     }
     iElapsCPU = cpuSecond() - iStart;
     
-    const int streamSize = NUM_PARTICLES / NUM_STREAMS;
-    const int streamBytes = streamSize * sizeof(Particle);
-    cudaStream_t stream[NUM_STREAMS];
-
-    for (int i = 0; i < NUM_STREAMS; i++)
-        cudaStreamCreate(&stream[i]);
-
     // Meassure GPU performance
     iStart = cpuSecond();
 
-    for (int j = 0; j < NUM_ITERATIONS; j++)
-        for (int i = 0; i < NUM_STREAMS; i++) {
-            int offset = i * streamSize;
-            cudaMemcpyAsync(&pGPU[offset], &pGPUres[offset], streamBytes, cudaMemcpyHostToDevice, stream[i]);
-            oneTimestepGPU<<<(streamSize + BLOCK_SIZE - 1)/BLOCK_SIZE, BLOCK_SIZE, 0, stream[i]>>>(pGPU, offset, streamSize);
-            cudaMemcpyAsync(&pGPUres[offset], &pGPU[offset], streamBytes, cudaMemcpyDeviceToHost, stream[i]);
-        }
-    
-    cudaDeviceSynchronize();
+    for (int i = 0; i < NUM_ITERATIONS; i++) {
+        cudaMemcpy(pGPU, pGPUres, NUM_PARTICLES * sizeof(Particle), cudaMemcpyHostToDevice);
+        oneTimestepGPU<<<nBlocks, BLOCK_SIZE>>>(pGPU);
+        cudaDeviceSynchronize();
+        cudaMemcpy(pGPUres, pGPU, NUM_PARTICLES * sizeof(Particle), cudaMemcpyDeviceToHost);
+    }
     iElapsGPU = cpuSecond() - iStart;
     cudaFree(pGPU);
-
-    for (int i = 0; i < NUM_STREAMS; i++)
-        cudaStreamDestroy(stream[i]);
 
     // Check the number of errors
     nErrors = 0;
