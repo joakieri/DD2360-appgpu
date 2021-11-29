@@ -145,14 +145,10 @@ void shared_sgemm_kernel(float *C, float *A, float *B, long size) {
 			__syncthreads();
 	
 			/* TODO introduce a pragma directive that can potentially improve performance here */
-			// #pragma unroll TILE_SIZE
+			#pragma unroll
 			for (long k = 0; k < TILE_SIZE; ++k) {
 				/* TODO Perform multiplication here */
-				float val = 0.0;
-				for (long k = 0; k < TILE_SIZE; k++) {
-					val += tile_A[threadIdx.y][k] * tile_B[k][threadIdx.x];
-				}
-				C[threadIdx.y * size + threadIdx.x] += val;
+				val += tile_A[threadIdx.y][k] * tile_B[k][threadIdx.x];
 			}
 			__syncthreads();
 		}
@@ -193,9 +189,9 @@ void cublas_sgemm(float *C, float *A, float *B, long size)
 	size, 
 	size, 
 	&alpha, 
-	A, 
-	size, 
 	B, 
+	size, 
+	A, 
 	size, 
 	&beta, 
 	C, 
@@ -282,7 +278,6 @@ int main(int argc, char *argv[])
 	cublas_sgemm(d_C, d_A, d_B, size);
 	if (verify) {
 		checkCudaErrors(cudaMemcpy(C_result, d_C, sizeof(float)*size*size, cudaMemcpyDeviceToHost));
-		printf("cuBlas: ");
 		compare_matrix(C_result, C_truth, size, THRESHOLD);
 	}
 	else {
@@ -293,14 +288,12 @@ int main(int argc, char *argv[])
 	checkCudaErrors(cudaMemset(d_C, 0, sizeof(float)*size*size));
 	naive_sgemm(d_C, d_A, d_B, size);
 	checkCudaErrors(cudaMemcpy(C_result, d_C, sizeof(float)*size*size, cudaMemcpyDeviceToHost));
-	printf("Naive: ");
 	compare_matrix(C_result, C_truth, size, THRESHOLD);
 
 	/* run shared */
 	checkCudaErrors(cudaMemset(d_C, 0, sizeof(float)*size*size));
 	shared_sgemm(d_C, d_A, d_B, size);
 	checkCudaErrors(cudaMemcpy(C_result, d_C, sizeof(float)*size*size, cudaMemcpyDeviceToHost));
-	printf("Shared: ");
 	compare_matrix(C_result, C_truth, size, THRESHOLD);
 
 	/* free */
