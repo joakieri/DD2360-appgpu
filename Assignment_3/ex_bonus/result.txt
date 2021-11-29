@@ -61,3 +61,30 @@ CPU matmul:			157.979000 ms
 GPU cuBLAS matmul:		3.579000 ms
 GPU matmul (global memory):	215.582000 ms
 GPU matmul (shared memory):	22.406000 ms
+
+
+joakieri@red-17:~/Documents/DD2360-appgpu/Assignment_3/ex_bonus$ ./exercise_bonus.out -s 2048 -v
+Matrix size: 2048x2048
+Matrix size: 2048x2048
+Grid size: 128x128
+Tile size: 16x16
+Run CPU sgemm: 1
+
+CPU matmul:			2257.867000 ms
+GPU cuBLAS matmul:		27.898000 ms
+GPU matmul (global memory):	1712.326000 ms
+GPU matmul (shared memory):	180.795000 ms
+
+
+joakieri@red-17:~/Documents/DD2360-appgpu/Assignment_3/ex_bonus$ ./exercise_bonus.out -s 4096 -v
+Matrix size: 4096x4096
+Matrix size: 4096x4096
+Grid size: 256x256
+Tile size: 16x16
+Run CPU sgemm: 1
+
+CPU matmul:			19760.780000 ms
+GPU cuBLAS matmul:		225.941000 ms
+GPU matmul (global memory):	14078.689000 ms
+GPU matmul (shared memory):	1446.124000 ms
+
