@@ -1,0 +1,63 @@
+joakieri@red-17:~/Documents/DD2360-appgpu/Assignment_3/ex_bonus$ ./exercise_bonus.out -s 64 -v
+Matrix size: 64x64
+Matrix size: 64x64
+Grid size: 4x4
+Tile size: 16x16
+Run CPU sgemm: 1
+
+CPU matmul:			0.050000 ms
+GPU cuBLAS matmul:		0.044000 ms
+GPU matmul (global memory):	0.080000 ms
+GPU matmul (shared memory):	0.017000 ms
+
+
+joakieri@red-17:~/Documents/DD2360-appgpu/Assignment_3/ex_bonus$ ./exercise_bonus.out -s 128 -v
+Matrix size: 128x128
+Matrix size: 128x128
+Grid size: 8x8
+Tile size: 16x16
+Run CPU sgemm: 1
+
+CPU matmul:			0.338000 ms
+GPU cuBLAS matmul:		0.060000 ms
+GPU matmul (global memory):	0.469000 ms
+GPU matmul (shared memory):	0.065000 ms
+
+
+joakieri@red-17:~/Documents/DD2360-appgpu/Assignment_3/ex_bonus$ ./exercise_bonus.out -s 256 -v
+Matrix size: 256x256
+Matrix size: 256x256
+Grid size: 16x16
+Tile size: 16x16
+Run CPU sgemm: 1
+
+CPU matmul:			2.720000 ms
+GPU cuBLAS matmul:		0.137000 ms
+GPU matmul (global memory):	3.264000 ms
+GPU matmul (shared memory):	0.352000 ms
+
+
+joakieri@red-17:~/Documents/DD2360-appgpu/Assignment_3/ex_bonus$ ./exercise_bonus.out -s 512 -v
+Matrix size: 512x512
+Matrix size: 512x512
+Grid size: 32x32
+Tile size: 16x16
+Run CPU sgemm: 1
+
+CPU matmul:			21.120000 ms
+GPU cuBLAS matmul:		0.521000 ms
+GPU matmul (global memory):	25.315000 ms
+GPU matmul (shared memory):	3.009000 ms
+
+
+joakieri@red-17:~/Documents/DD2360-appgpu/Assignment_3/ex_bonus$ ./exercise_bonus.out -s 1024 -v
+Matrix size: 1024x1024
+Matrix size: 1024x1024
+Grid size: 64x64
+Tile size: 16x16
+Run CPU sgemm: 1
+
+CPU matmul:			157.979000 ms
+GPU cuBLAS matmul:		3.579000 ms
+GPU matmul (global memory):	215.582000 ms
+GPU matmul (shared memory):	22.406000 ms
