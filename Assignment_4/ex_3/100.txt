@@ -1,0 +1,5 @@
+Array size: 100
+Computing SAXPY on the CPU...Done!
+Computing SAXPY on the GPU...Done!
+Comparing the output for each implementation...Correct!
+CPU time: 0.000000, GPU time: 0.113731
