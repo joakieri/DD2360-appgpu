@@ -1,0 +1,200 @@
+16 10000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.039885, GPU time: 0.016484
+16 20000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.079909, GPU time: 0.026599
+16 30000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.117931, GPU time: 0.036564
+16 40000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.155810, GPU time: 0.046654
+16 50000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.195995, GPU time: 0.056496
+16 60000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.233695, GPU time: 0.079731
+16 70000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.272325, GPU time: 0.181358
+16 80000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.311599, GPU time: 0.206956
+32 10000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.040956, GPU time: 0.015474
+32 20000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.094832, GPU time: 0.027113
+32 30000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.123465, GPU time: 0.037236
+32 40000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.155722, GPU time: 0.047245
+32 50000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.196896, GPU time: 0.057116
+32 60000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.233698, GPU time: 0.086275
+32 70000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.273363, GPU time: 0.183787
+32 80000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.311137, GPU time: 0.211690
+64 10000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.039619, GPU time: 0.015652
+64 20000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.078373, GPU time: 0.032024
+64 30000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.117414, GPU time: 0.038738
+64 40000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.158939, GPU time: 0.054130
+64 50000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.194819, GPU time: 0.064292
+64 60000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.233229, GPU time: 0.085986
+64 70000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.272231, GPU time: 0.181409
+64 80000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.311151, GPU time: 0.211698
+128 10000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.043530, GPU time: 0.015505
+128 20000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.078988, GPU time: 0.028241
+128 30000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.118925, GPU time: 0.042021
+128 40000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.156746, GPU time: 0.051988
+128 50000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.202806, GPU time: 0.063860
+128 60000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.309350, GPU time: 0.086072
+128 70000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.271644, GPU time: 0.182344
+128 80000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.320323, GPU time: 0.211580
+256 10000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.039611, GPU time: 0.015818
+256 20000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.078330, GPU time: 0.030227
+256 30000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.117336, GPU time: 0.042328
+256 40000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.158153, GPU time: 0.052328
+256 50000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.198311, GPU time: 0.064384
+256 60000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.240353, GPU time: 0.088916
+256 70000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.308016, GPU time: 0.232311
+256 80000
+Computing particles on the CPU…Done!
+Computing particles on the GPU…Done!
+Comparing the output for each implementation…Correct!
+CPU time: 0.314651, GPU time: 0.245099
